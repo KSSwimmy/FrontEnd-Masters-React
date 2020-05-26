@@ -23,3 +23,4 @@ export default SearchParams
 //putting the input inside of a label is good for accessability so that if someone clicks on the location that it highlights the correct input. 
 
 //location is the current state of location, setLocation is the updated state.
+//Hooks never go inside of if statements 
