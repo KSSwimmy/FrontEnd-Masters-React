@@ -1,12 +1,24 @@
-import React, { useState } from "react";
-import { ANIMALS } from "@frontendmasters/pet";
-import useDropdown from './useDropdown';
+import React, { useState, useEffect } from "react";
+import pet, { ANIMALS } from "@frontendmasters/pet";
+import useDropdown from "./useDropdown";
 
 const SearchParams = () => {
   const [location, setLocation] = useState("Seattle, WA");
   const [breeds, setBreeds] = useState([]);
   const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
-  const [breed, BreedDropdown] = useDropdown("Breed", "", breeds)
+  const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
+
+  useEffect(() => {
+    setBreeds([]);
+    setBreed("");
+
+    pet.breeds(animal).then(({ breeds }) => {
+      //const breedStrings = breeds.map(({ breedObj }) => breedObj.name);same thing as above
+      const breedStrings = breeds.map(({ name }) => name);
+      setBreeds(breedStrings);
+    }, console.error);
+  }, [animal, setBreed, setBreeds]);
+  //useEffect is disconnected from when the render is happening. This is scheduling this function to run after the render (down below) happens
 
   return (
     <div className="search-params">
@@ -39,3 +51,5 @@ export default SearchParams;
 //Configuring ESLint fro Hooks - npm i -D eslint-plugin-react-hooks
 
 //onBlur is for Screen Readers. They don't always pick up onChange. (accessability)
+
+//useEffect take the place of several life cycle keywords. (componentDidMount, componentWillUnmount, and componentDidUpdate)
