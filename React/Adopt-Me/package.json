@@ -19,7 +19,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.20.0",
-    "parcel": "^1.12.4",
+    "parcel": "^2.8.2",
     "prettier": "^2.0.5"
   },
   "dependencies": {
